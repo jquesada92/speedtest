@@ -1,0 +1,5 @@
+plot_bgcolor = "#2c292d"
+paper_bgcolor ="#211f22"
+download_color = "#ab9df2"
+upload_color = "#78dce8"
+default_fontcolor = "white"
