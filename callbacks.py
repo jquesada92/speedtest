@@ -1,9 +1,8 @@
-
 from dash.dependencies import Input, Output
 import pandas as pd
 from charts import line_chart_download_vs_upload, gauge_chart
 from charts.config import *
-
+from os import environ
 def register_Callback(app):
 
     @app.callback(
@@ -13,7 +12,7 @@ def register_Callback(app):
     [Input("interval-component", "n_intervals")],)
     def streamFig(value):
 
-        df = pd.read_parquet("measures")
+        df = pd.read_parquet(environ['path_parquet_speedtest'])
         df.index = df.timestamp
         gauge_chart_download = gauge_chart(
             df.iloc[-3:]["Download_Mbps"].mean(),
