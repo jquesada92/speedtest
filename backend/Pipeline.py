@@ -22,7 +22,7 @@ class SpeedTestLogs:
                 with open(file,'r') as f:
                     text = f.read()
                 return text
-
+            sleep(10)
             text = open_log(file)
             date =  re.search("(\d{14})\n\n",text).group(1)
             data = {'timestamp' : [dt.strptime(date,"%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")],
