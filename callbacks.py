@@ -2,6 +2,12 @@ from dash.dependencies import Input, Output
 import pandas as pd
 from charts import line_chart_download_vs_upload, gauges_indicators
 from charts.config import *
+from os import environ
+
+try: 
+    speed_test_data = environ['path_parquet_speedtest']
+except KeyError:
+    seepd_test_data = 'measures'
 
 
 def register_Callback(app):
@@ -12,7 +18,7 @@ def register_Callback(app):
     )
     def streamFig(value):
 
-        df = pd.read_parquet("measures")
+        df = pd.read_parquet(seepd_test_data)
         df.index = df.timestamp
         line_chart = line_chart_download_vs_upload(df)
 

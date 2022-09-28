@@ -1,7 +1,7 @@
 from glob import glob
 import re
 from datetime import datetime as dt
-from os import remove
+from os import remove, environ
 import pandas as pd
 from time import sleep
 
@@ -28,7 +28,7 @@ class SpeedTestLogs:
             data = {'timestamp' : [dt.strptime(date,"%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")],
                 'Download_Mbps' : [retrieve_float("Download:\s+(\d+\.{0,1}\d+)\s+Mbps\s+",text)],
                 'Upload_Mbps' : [retrieve_float("Upload:\s+(\d+\.{0,1}\d+)\s+Mbps\s+",text)]}
-            pd.DataFrame.from_dict(data=data).assign(timestamp = lambda x : pd.to_datetime(x.timestamp)).to_parquet(f"""./measures/{date}.parquet""")
+            pd.DataFrame.from_dict(data=data).assign(timestamp = lambda x : pd.to_datetime(x.timestamp)).to_parquet(f"""{environ['path_parquet_speedtest']}/{date}.parquet""")
             remove(file)
         except Exception as er: 
             print(file,er)
@@ -42,7 +42,6 @@ class SpeedTestLogs:
     
 
 
-speed_test_pipeline = SpeedTestLogs(path=r"C:\Users\jaque\Documents\GitHub\speedtest\data")
-while True:
-    speed_test_pipeline.convert_test_into_log()
-    sleep(50)
+speed_test_pipeline = SpeedTestLogs(path=environ['path_data_speedtest'])
+speed_test_pipeline.convert_test_into_log()
+
