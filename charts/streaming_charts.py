@@ -10,8 +10,6 @@ def line_chart_download_vs_upload(df):
     
     now = dt.now()
     _24hrs_ago = now - td(hours=24)
-    print(now,_24hrs_ago)
-    print(df.sort_index(ascending=False).head())
     df = df.copy().loc[_24hrs_ago:now]
     x = df.index
     line_chart = make_subplots(specs=[[{"secondary_y": True}]])
@@ -100,7 +98,7 @@ def gauges_indicators(df):
     fig = go.Figure()
     fig.add_trace(gauge_chart(
         sample["Download_Mbps"].mean(),
-        [0,1],
+        [0.1,1],
         [0.45,0.85],
         steps=[[0, 450], [450, 600], [600, 700]],
         title=f"<span style='font-size:0.8em;color:{download_color}'>Download</span>",
@@ -109,7 +107,7 @@ def gauges_indicators(df):
     
     fig.add_trace( gauge_chart(
         sample["Upload_Mbps"].mean(),
-        [0,1],
+        [0.1,1],
         [0,0.40],
         steps=[[0, 10], [10, 15], [15, 20]],
         title=f"<span style='font-size:0.8em;color:{upload_color}'>Upload</span>",
@@ -118,9 +116,9 @@ def gauges_indicators(df):
     fig.update_layout(
             paper_bgcolor=paper_bgcolor,
             font={"color": "white", "family": "Arial"},
-            margin=dict(l=0, r=0,b=5,t=5),
+            margin=dict(l=5, r=0,b=5,t=5),
         )
-    fig.update_traces(number=dict(font=dict(size=26)),
+    fig.update_traces(number=dict(font=dict(size=20)),
         delta=dict(font=dict(size=18)), )
     return fig
     
