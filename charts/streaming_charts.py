@@ -1,19 +1,22 @@
-from functools import reduce
-
-import plotly.express as px
+from datetime import datetime as dt,timedelta as td
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from .config import *
 
 
-def line_chart_download_vs_upload(df):
 
-    # Create figure with secondary y-axis
+
+def line_chart_download_vs_upload(df):
+    
+    now = dt.now()
+    _24hrs_ago = now - td(hours=24)
+    print(now,_24hrs_ago)
+    print(df.sort_index(ascending=False).head())
+    df = df.copy().loc[_24hrs_ago:now]
+    x = df.index
     line_chart = make_subplots(specs=[[{"secondary_y": True}]])
 
-    # Add traces
 
-    x = df.index
 
     line_chart.add_trace(
         go.Scatter(
@@ -36,8 +39,10 @@ def line_chart_download_vs_upload(df):
         plot_bgcolor=plot_bgcolor,
         paper_bgcolor=paper_bgcolor,
         font=dict(color="white"),
-        title="Download Vs Upload (Mbps)",
+        title="Speed Download Vs Upload (Mbps)",
         legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
+        width=850,
+         margin=dict(l=5, r=5),
     )
     line_chart.update_xaxes(
         showgrid=False,
@@ -58,19 +63,18 @@ def line_chart_download_vs_upload(df):
 
     return line_chart
 
+def gauges_indicators(df):
 
-def gauge_chart(value, steps, title, color):
-
-    max_step = steps[-1][-1]
-
-    gauge = go.Figure(
-        go.Indicator(
-            mode="gauge+number+delta",
-            value=value,
-            domain={"x": [0, 1], "y": [0, 1]},
-            title={"text": title, "font": {"size": 24}},
-            delta={"reference": steps[-1][0], "increasing": {"color": "RebeccaPurple"}},
-            gauge={
+    def gauge_chart(value,x,y, steps, title, color):
+        max_step = steps[-1][-1]
+        title = f"{title} <span style='font-size:0.8em;color:gray'>MBps</span><br><span style='font-size:0.5em;color:gray'>Average</span>"
+        gauge = go.Indicator(
+                mode="gauge+number+delta",
+                value=value,
+                domain={"x": x, "y": y},
+                title={"text": title, "font": {"size": 18},'align': 'center' },
+                delta={"reference": steps[-1][0], "increasing": {"color": color}},
+                  gauge={
                 "axis": {
                     "range": [None, max_step],
                     "tickwidth": 2,
@@ -86,10 +90,37 @@ def gauge_chart(value, steps, title, color):
                     {"range": steps[2], "color": "#a9dc76"},
                 ],
             },
+            )
+        
+       
+        return gauge
+
+    sample = df.iloc[-3:]
+    
+    fig = go.Figure()
+    fig.add_trace(gauge_chart(
+        sample["Download_Mbps"].mean(),
+        [0,1],
+        [0.45,0.85],
+        steps=[[0, 450], [450, 600], [600, 700]],
+        title=f"<span style='font-size:0.8em;color:{download_color}'>Download</span>",
+        color=download_color,
+    )    )
+    
+    fig.add_trace( gauge_chart(
+        sample["Upload_Mbps"].mean(),
+        [0,1],
+        [0,0.40],
+        steps=[[0, 10], [10, 15], [15, 20]],
+        title=f"<span style='font-size:0.8em;color:{upload_color}'>Upload</span>",
+        color=upload_color,
+    ))
+    fig.update_layout(
+            paper_bgcolor=paper_bgcolor,
+            font={"color": "white", "family": "Arial"},
+            margin=dict(l=0, r=0,b=5,t=5),
         )
-    )
-    gauge.update_layout(
-        paper_bgcolor=paper_bgcolor,
-        font={"color": "white", "family": "Arial"},
-    )
-    return gauge
+    fig.update_traces(number=dict(font=dict(size=26)),
+        delta=dict(font=dict(size=18)), )
+    return fig
+    
