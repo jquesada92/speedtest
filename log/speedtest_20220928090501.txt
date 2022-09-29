@@ -1,0 +1,13 @@
+20220928090501
+
+   Speedtest by Ookla
+
+      Server: Ufinet - Panama (id: 31830)
+         ISP: Tigo Panama
+Idle Latency:    13.04 ms   (jitter: 1.22ms, low: 11.56ms, high: 13.62ms)
+    Download:   751.42 Mbps (data used: 1.0 GB)                                                   
+                 68.16 ms   (jitter: 30.76ms, low: 8.98ms, high: 358.08ms)
+      Upload:    15.06 Mbps (data used: 18.0 MB)                                                   
+                 30.20 ms   (jitter: 3.00ms, low: 5.48ms, high: 62.44ms)
+ Packet Loss:     0.0%
+  Result URL: https://www.speedtest.net/result/c/03b55cd9-6daf-424a-a8c9-73e825ea5ef9

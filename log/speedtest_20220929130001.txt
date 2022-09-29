@@ -1,0 +1,13 @@
+20220929130001
+
+   Speedtest by Ookla
+
+      Server: Liberty Technologies - Panama City (id: 11924)
+         ISP: Tigo Panama
+Idle Latency:    13.04 ms   (jitter: 2.00ms, low: 7.90ms, high: 14.24ms)
+    Download:   167.22 Mbps (data used: 200.2 MB)                                                   
+                180.22 ms   (jitter: 54.16ms, low: 9.58ms, high: 880.92ms)
+      Upload:    14.98 Mbps (data used: 8.0 MB)                                                   
+                  8.78 ms   (jitter: 2.50ms, low: 6.38ms, high: 35.56ms)
+ Packet Loss: Not available.
+  Result URL: https://www.speedtest.net/result/c/7e8a69cb-39d7-4fab-af49-a8c6e4102c12

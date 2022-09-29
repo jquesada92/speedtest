@@ -5,6 +5,16 @@ from os import remove, environ
 import pandas as pd
 from time import sleep
 
+try:
+    log_folder = environ['SPEEDTEST_LOG']
+except KeyError:
+    log_folder = "log"
+
+try: 
+    speed_test_data = environ['SPEEDTEST_PARQUET']
+except KeyError:
+    seepd_test_data = 'data'
+
 class SpeedTestLogs:
 
     def __init__(self,path):
@@ -42,6 +52,6 @@ class SpeedTestLogs:
     
 
 
-speed_test_pipeline = SpeedTestLogs(path=environ['path_data_speedtest'])
+speed_test_pipeline = SpeedTestLogs(path=environ['SPEEDTEST_PARQUET'])
 speed_test_pipeline.convert_test_into_log()
 

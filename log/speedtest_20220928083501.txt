@@ -7,3 +7,7 @@
 Idle Latency:    12.66 ms   (jitter: 0.80ms, low: 11.90ms, high: 13.70ms)
     Download:   360.16 Mbps (data used: 501.4 MB)                                                   
                  40.14 ms   (jitter: 23.60ms, low: 7.40ms, high: 247.74ms)
+      Upload:    15.06 Mbps (data used: 13.6 MB)                                                   
+                 15.94 ms   (jitter: 3.38ms, low: 5.52ms, high: 91.86ms)
+ Packet Loss:     0.0%
+  Result URL: https://www.speedtest.net/result/c/bc4e6be6-b8c1-4307-9a3f-b2e1089519d5
