@@ -1,13 +1,0 @@
-20220928194001
-
-   Speedtest by Ookla
-
-      Server: Shadwell International - Panama City (id: 11318)
-         ISP: Tigo Panama
-Idle Latency:    14.28 ms   (jitter: 3.86ms, low: 11.46ms, high: 19.32ms)
-    Download:   439.00 Mbps (data used: 366.6 MB)                                                   
-                 15.34 ms   (jitter: 8.72ms, low: 8.76ms, high: 104.94ms)
-      Upload:    15.02 Mbps (data used: 11.0 MB)                                                   
-                  8.54 ms   (jitter: 2.68ms, low: 5.52ms, high: 53.26ms)
- Packet Loss:     0.0%
-  Result URL: https://www.speedtest.net/result/c/34b44568-79b2-4e6a-bd23-ba3c53e1cb9a

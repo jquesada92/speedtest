@@ -6,70 +6,66 @@ from .config import *
 
 
 
-def line_chart_download_vs_upload(df):
+
+def line_chart_download_vs_upload(fig,df):
     
     now = dt.now()
     _24hrs_ago = now - td(hours=162)
     df = df.copy().loc[_24hrs_ago:now]
     x = df.index
-    line_chart = make_subplots(specs=[[{"secondary_y": True}]])
-
-
-
-    line_chart.add_trace(
+    
+    fig.add_trace(
         go.Scatter(
             x=x,
             y=df.Download_Mbps,
             name="Download (Mbps)",
             line=dict(color=download_color),
-        ),
+
+        ),row =2, col=1,
         secondary_y=False,
     )
 
-    line_chart.add_trace(
+    fig.add_trace(
         go.Scatter(
             x=x, y=df.Upload_Mbps, name="Upload (Mbps)", line=dict(color=upload_color)
-        ),
+        ),row =2, col=1,
         secondary_y=True,
     )
 
-    line_chart.update_layout(
+    fig.update_layout(
         plot_bgcolor=plot_bgcolor,
         paper_bgcolor=paper_bgcolor,
         font=dict(color="white"),
-        title="Speed Download Vs Upload (Mbps)",
-        legend=dict(orientation="h", yanchor="bottom", y=1.02, xanchor="right", x=1),
-         margin=dict(l=5, r=5),
+        legend=dict(orientation="h", yanchor="bottom", y=-0.15, xanchor="right", x=1),
     )
-    line_chart.update_xaxes(
+    fig.update_xaxes(
         showgrid=False,
     )
-    line_chart.update_yaxes(
+    fig.update_yaxes(
         showgrid=False,
     )
-    line_chart.update_yaxes(
+    fig.update_yaxes(
         title_text="<b>Download (Mbps)</b> yaxis title",
         color=download_color,
         secondary_y=False,
     )
-    line_chart.update_yaxes(
+    fig.update_yaxes(
         title_text="<b>Upload (Mbps)</b> yaxis title",
         color=upload_color,
         secondary_y=True,
     )
 
-    return line_chart
 
-def gauges_indicators(df):
+def gauges_indicators(fig,df):
 
-    def gauge_chart(value,x,y, steps, title, color):
+    def gauge_chart(value, steps, title, color):
         max_step = steps[-1][-1]
         title = f"{title} <span style='font-size:0.8em;color:gray'>MBps</span><br><span style='font-size:0.5em;color:gray'>Average</span>"
         gauge = go.Indicator(
                 mode="gauge+number+delta",
                 value=value,
-                domain={"x": x, "y": y},
-                title={"text": title, "font": {"size": 18},'align': 'center' },
+                domain={"x": [0.1,1], "y":[0,0.85]},
+                title={"text": title, "font": {"size": 32},'align': 'center' },
                 delta={"reference": steps[-1][0], "increasing": {"color": color}},
                   gauge={
                 "axis": {
@@ -92,32 +88,38 @@ def gauges_indicators(df):
        
         return gauge
 
-    sample = df.iloc[-3:]
-    
-    fig = go.Figure()
+    last_test= df.iloc[-1]
     fig.add_trace(gauge_chart(
-        sample["Download_Mbps"].mean(),
-        [0.1,1],
-        [0.55,0.85],
+        last_test["Download_Mbps"],
         steps=[[0, 450], [450, 600], [600, 700]],
         title=f"<span style='font-size:0.8em;color:{download_color}'>Download</span>",
         color=download_color,
-    )    )
+    )  ,row =1, col=1  )
     
     fig.add_trace( gauge_chart(
-        sample["Upload_Mbps"].mean(),
-        [0.1,1],
-        [0,0.35],
+        last_test["Upload_Mbps"],
         steps=[[0, 10], [10, 15], [15, 20]],
         title=f"<span style='font-size:0.8em;color:{upload_color}'>Upload</span>",
         color=upload_color,
-    ))
+    ),row =1, col=2)
     fig.update_layout(
             paper_bgcolor=paper_bgcolor,
             font={"color": "white", "family": "Arial"},
-            margin=dict(l=5, r=5,b=5,t=5),
         )
-    fig.update_traces(number=dict(font=dict(size=32)),
-        delta=dict(font=dict(size=25)), )
-    return fig
+    fig.update_traces(number=dict(font=dict(size=36)),
+        delta=dict(font=dict(size=30)), )
+   
+def multiplot_speedtest(df):
+    fig = make_subplots(
+    rows=2, cols=2,
+    specs=[[{"type": "domain"}, {"type": "domain"}],
+           [{"colspan": 2,"secondary_y":True}, None]],
+           row_heights =[0.3,0.7])
+    gauges_indicators(fig,df)
+    line_chart_download_vs_upload(fig,df)
+    fig.update_layout(height=600, margin=dict(l=0,r=0,b=0))
     
+    return fig
+
+    
+

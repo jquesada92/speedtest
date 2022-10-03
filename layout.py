@@ -9,30 +9,71 @@ updates = dcc.Interval(
     id="interval-component", interval=300000, n_intervals=0  # in milliseconds
 )
 
-gauge_col = dbc.Col(
-    [
-    dcc.Graph(id="gauges_indicators", config=config)
-    ],
-    style={"background-color": paper_bgcolor},
-    class_name="d-inline g-0",
-    width=2,
+
+navbar = dbc.Navbar(
+    dbc.Container(
+        [
+            html.A(
+                # Use row and col to control vertical alignment of logo / brand
+                dbc.Row(
+                    [
+                        dbc.Col(html.Img(src="https://www.pinclipart.com/picdir/big/491-4917274_panama-flag-png-palestine-flag-vector-clipart.png", height="30px")),
+                        dbc.Col(dbc.NavbarBrand("Navbar", className="ms-2")),
+                    ],
+                    align="center",
+                    className="g-0",
+                ),
+                href="https://plotly.com",
+                style={"textDecoration": "none"},
+            ),
+            dbc.NavbarToggler(id="navbar-toggler", n_clicks=0),
+            
+        ]
+    ),
+    color=paper_bgcolor,
+    dark=True,
 )
 
-streaming_col = dbc.Col([dbc.Row(dcc.Graph(id="stream_line_chart", config=config),class_name="d-block"),
- dbc.Row(dcc.Slider(1, 24,1, value=1, id = "moving_average"),class_name="d-block w-95 mx-15")
-], class_name='d-inline ml-5')
+
+
+resample_options = html.Div(
+[
+html.P('Resample optios:'),
+dcc.RadioItems(   options=[
+       {'label': 'Minutes', 'value': 'T'},
+       {'label': 'Hours', 'value': 'H'},
+       {'label': 'Days', 'value': 'D'},
+   ],
+        value='T',
+        inline = False
+    )],className='d-block')
+
+rolling_options =  html.Div([
+    html.P("Rolling:"),
+    dcc.Slider(1, 24,1, value=1,  marks={
+                            1: {'label': '1'},
+                            12: {'label': '12'},
+                            24: {'label': '24'}
+                        },
+                         updatemode='drag',
+                          id = "moving_average")
+])
+
+controls = dbc.Col([resample_options,html.Br(),rolling_options],width= 2, className='vw-25')
+
+streaming_col = dbc.Col(dcc.Graph(id="stream_line_chart", config=config),class_name='d-inline vw-75')
 
 
 layout = dbc.Container(
-    [
-        dbc.Row(
-            [updates, gauge_col, streaming_col],
+    
+    [ navbar,dbc.Container([
+    dcc.Store(id='last_32hrs'),
+
+dbc.Row([updates,controls , html.Br(),
+streaming_col],
             style={
                 "background-color": paper_bgcolor,
+                "color": default_fontcolor
             },
-            class_name="g-0",
-        )
-    ],
-    fluid = True
-
-)
+            
+)])])

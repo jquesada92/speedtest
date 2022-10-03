@@ -1,13 +1,0 @@
-20220929021001
-
-   Speedtest by Ookla
-
-      Server: Celero Networks Corp. - Panama (id: 35937)
-         ISP: Tigo Panama
-Idle Latency:    16.16 ms   (jitter: 4.12ms, low: 13.04ms, high: 21.40ms)
-    Download:   477.96 Mbps (data used: 838.8 MB)                                                   
-                816.96 ms   (jitter: 86.78ms, low: 10.34ms, high: 2513.22ms)
-      Upload:    15.10 Mbps (data used: 8.0 MB)                                                   
-                  8.56 ms   (jitter: 2.70ms, low: 6.16ms, high: 42.14ms)
- Packet Loss:     0.0%
-  Result URL: https://www.speedtest.net/result/c/ea6e586c-e9b2-4788-a0be-b058b1675016

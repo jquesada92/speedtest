@@ -1,2 +1,2 @@
-from .streaming_charts import line_chart_download_vs_upload, gauges_indicators
+from .streaming_charts import multiplot_speedtest
 from . import config

@@ -13,7 +13,7 @@ except KeyError:
 try: 
     speed_test_data = environ['SPEEDTEST_PARQUET']
 except KeyError:
-    seepd_test_data = 'data'
+    speed_test_data = 'data'
 
 class SpeedTestLogs:
 
@@ -38,7 +38,7 @@ class SpeedTestLogs:
             data = {'timestamp' : [dt.strptime(date,"%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")],
                 'Download_Mbps' : [retrieve_float("Download:\s+(\d+\.{0,1}\d+)\s+Mbps\s+",text)],
                 'Upload_Mbps' : [retrieve_float("Upload:\s+(\d+\.{0,1}\d+)\s+Mbps\s+",text)]}
-            pd.DataFrame.from_dict(data=data).assign(timestamp = lambda x : pd.to_datetime(x.timestamp)).to_parquet(f"""{environ['path_parquet_speedtest']}/{date}.parquet""")
+            pd.DataFrame.from_dict(data=data).assign(timestamp = lambda x : pd.to_datetime(x.timestamp)).to_parquet(f"""{speed_test_data}/{date}.parquet""")
             remove(file)
         except Exception as er: 
             print(file,er)
@@ -52,6 +52,12 @@ class SpeedTestLogs:
     
 
 
-speed_test_pipeline = SpeedTestLogs(path=environ['SPEEDTEST_PARQUET'])
-speed_test_pipeline.convert_test_into_log()
+speed_test_pipeline = SpeedTestLogs(path=log_folder)
+
+while True:
+    speed_test_pipeline.convert_test_into_log()
+    sleep(60*5)
+
+
+
 
