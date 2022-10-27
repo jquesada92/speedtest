@@ -32,20 +32,21 @@ class SpeedTestLogs:
                 with open(file,'r') as f:
                     text = f.read()
                 return text
-            sleep(10)
             text = open_log(file)
             date =  re.search("(\d{14})\n\n",text).group(1)
             data = {'timestamp' : [dt.strptime(date,"%Y%m%d%H%M%S").strftime("%Y-%m-%d %H:%M:%S")],
                 'Download_Mbps' : [retrieve_float("Download:\s+(\d+\.{0,1}\d+)\s+Mbps\s+",text)],
-                'Upload_Mbps' : [retrieve_float("Upload:\s+(\d+\.{0,1}\d+)\s+Mbps\s+",text)]}
+                'Upload_Mbps' : [retrieve_float("Upload:\s+(\d+\.{0,1}\d+)\s+Mbps\s+",text)],
+                'ping':[retrieve_float("Idle Latency:\s+(\d+\.{0,1}\d+)\s+ms",text)]}
             pd.DataFrame.from_dict(data=data).assign(timestamp = lambda x : pd.to_datetime(x.timestamp)).to_parquet(f"""{speed_test_data}/{date}.parquet""")
             remove(file)
         except Exception as er: 
             print(file,er)
+            remove(file)
+        
+            
     
     def convert_test_into_log(self):
-        
-        
         list(map(self.retrive_information, glob(f"{self.path}/*.txt")))
         
             
@@ -56,7 +57,7 @@ speed_test_pipeline = SpeedTestLogs(path=log_folder)
 
 while True:
     speed_test_pipeline.convert_test_into_log()
-    sleep(60*5)
+
 
 
 

@@ -18,7 +18,7 @@ navbar = dbc.Navbar(
                 dbc.Row(
                     [
                         dbc.Col(html.Img(src="https://www.pinclipart.com/picdir/big/491-4917274_panama-flag-png-palestine-flag-vector-clipart.png", height="30px")),
-                        dbc.Col(dbc.NavbarBrand("Navbar", className="ms-2")),
+                        dbc.Col(dbc.NavbarBrand("Network Speed Test by Jose Quesada", className="ms-2")),
                     ],
                     align="center",
                     className="g-0",
@@ -59,9 +59,9 @@ rolling_options =  html.Div([
                           id = "moving_average")
 ])
 
-controls = dbc.Col([resample_options,html.Br(),rolling_options],width= 2, className='vw-25')
+#controls = dbc.Col([resample_options,html.Br(),rolling_options],width= 2, className='vw-25')
 
-streaming_col = dbc.Col(dcc.Graph(id="stream_line_chart", config=config),class_name='d-inline vw-75')
+streaming_col = dbc.Col(dcc.Graph(id="stream_line_chart", config=config),className='d-inline vw-75')
 
 
 layout = dbc.Container(
@@ -69,7 +69,7 @@ layout = dbc.Container(
     [ navbar,dbc.Container([
     dcc.Store(id='last_32hrs'),
 
-dbc.Row([updates,controls , html.Br(),
+dbc.Row([updates ,
 streaming_col],
             style={
                 "background-color": paper_bgcolor,

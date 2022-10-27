@@ -14,15 +14,12 @@ def register_Callback(app):
     @app.callback(
         Output("stream_line_chart", "figure"),
         [Input("interval-component", "n_intervals"),
-        Input("moving_average","value")],
+        ],
     )
-    def streamFig(intervals,ma_value):
-        print(ma_value)
+    def streamFig(intervals):
+
         df = pd.read_parquet(speed_test_data)
         df.index = df.timestamp
-        if ma_value > 1 :
-            df = df.rolling(ma_value)[["Upload_Mbps","Download_Mbps"]].mean()
-
         return multiplot_speedtest(df)
 
 
