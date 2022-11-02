@@ -1,5 +1,0 @@
-plotly
-dash
-dash-bootstrap-components
-pandas
-pyarrow

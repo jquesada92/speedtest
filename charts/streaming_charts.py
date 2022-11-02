@@ -1,8 +1,7 @@
-from datetime import datetime as dt,timedelta as td
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 from .config import *
-
+from pandas import read_parquet
 
 
 
@@ -12,6 +11,20 @@ def line_chart_download_vs_upload(fig,df):
     df = df.copy()
     x = df.index
     
+    fig.add_trace(
+    go.Scatter(
+        x=x, y=df.ping, name="Ping", line=dict(color='white')
+    ),row =1, col=2,
+    )
+    fig.update_yaxes(
+    title_text="<b>Ping</b>",
+    color='white',
+    rangemode = 'tozero',
+    showgrid=False,
+    row =1, col=2,
+    )
+
+
 
     
     fig.add_trace(
@@ -114,9 +127,10 @@ def gauges_indicators(fig,value):
     fig.update_layout(
             paper_bgcolor=paper_bgcolor,
             font={"color": "white", "family": "Arial"},
+            showlegend=False
         )
     fig.update_traces(
-        number=dict(font=dict(size=30)),
+        number=dict(font=dict(size=28)),
         delta=dict(font=dict(size=25))
         )
 
@@ -137,8 +151,7 @@ def ping_number(fig,value):
 
    
 def multiplot_speedtest(df):
-    last_7_days = dt.now().date() - td(days=7)
-    _df = df.loc[last_7_days: ].copy().sort_index()
+
     fig = make_subplots(
     rows=3, cols=2,
     specs=[
@@ -146,19 +159,31 @@ def multiplot_speedtest(df):
             [ {"type": "domain"}, {}],
             [{"type": "domain"},{}]
     ],
-    column_widths = [0.25,0.75],
-    row_heights= [0.2,0.4,0.4],
+    column_widths = [0.30,0.70],
+    row_heights = [0.22,0.38,0.38],
     horizontal_spacing=0.1, 
     vertical_spacing=0.25,
           )
     
-    values = _df.mean()
+    values = df.mean()
     gauges_indicators(fig,values)
     ping_number(fig,values['ping'])
-    line_chart_download_vs_upload(fig,_df)
-    fig.update_layout(height=600, margin=dict(l=0,r=0,b=0,t=50))
+    line_chart_download_vs_upload(fig,df)
+    fig.update_layout(height=545, margin=dict(l=30,r=30,b=30,t=35))
     
     return fig
 
     
 
+def Heatmaps():
+    
+    heatmap = lambda df: go.Heatmap(x=df.columns,z=df.values,y=list(map(lambda x:x.replace('_','<br>'),df.index)), colorscale='Spectral',zmax=1,zmin=0)
+    fig = make_subplots(1, 2,column_widths = [0.30,0.70],)
+    fig.add_trace(heatmap(read_parquet('calculations/part_of_the_date.parquet')),row=1, col=1)
+    fig.add_trace(heatmap(read_parquet('calculations/day_of_week.parquet')),row=1, col=2)
+    fig.update_layout(
+            paper_bgcolor=paper_bgcolor,
+            font={"color": "white", "family": "Arial"},
+            height=300, margin=dict(l=0,r=0,b=20,t=10)
+        )
+    return fig

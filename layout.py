@@ -61,19 +61,19 @@ rolling_options =  html.Div([
 
 #controls = dbc.Col([resample_options,html.Br(),rolling_options],width= 2, className='vw-25')
 
-streaming_col = dbc.Col(dcc.Graph(id="stream_line_chart", config=config),className='d-inline vw-75')
-
+streaming_col = dbc.Col(dcc.Graph(id="stream_line_chart", config=config))
+heatmap_col = dbc.Col(dcc.Graph(id='heatmaps'))
 
 layout = dbc.Container(
     
-    [ navbar,dbc.Container([
-    dcc.Store(id='last_32hrs'),
-
-dbc.Row([updates ,
-streaming_col],
+    [ navbar,
+    dbc.Container([updates,
+                    dcc.Store(id='last_32hrs'),
+                                dbc.Row(streaming_col), 
+                                    dbc.Row(heatmap_col)
+    ],
             style={
                 "background-color": paper_bgcolor,
                 "color": default_fontcolor
-            },
-            
-)])])
+            })])
+    

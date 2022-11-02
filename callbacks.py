@@ -1,13 +1,13 @@
 from dash.dependencies import Input, Output
 import pandas as pd
-from charts import multiplot_speedtest
+from charts import multiplot_speedtest, Heatmaps
 from charts.config import *
 from os import environ
 
 try: 
-    speed_test_data = environ['SPEEDTEST_PARQUET']
+    DATA = environ['DATA']
 except KeyError:
-    speed_test_data = 'data'
+    DATA = 'calculations/data.parquet'
 
 
 def register_Callback(app):
@@ -18,9 +18,18 @@ def register_Callback(app):
     )
     def streamFig(intervals):
 
-        df = pd.read_parquet(speed_test_data)
-        df.index = df.timestamp
+        df = pd.read_parquet(DATA)
         return multiplot_speedtest(df)
+
+
+    @app.callback(
+        Output("heatmaps", "figure"),
+        [Input("interval-component", "n_intervals"),
+        ],
+    )
+    def heatMaps(intervals):
+        return Heatmaps()
+ 
 
 
     
