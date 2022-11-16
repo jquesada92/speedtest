@@ -165,7 +165,7 @@ def multiplot_speedtest(df):
     vertical_spacing=0.25,
           )
     
-    values = df.mean()
+    values = df.iloc[-3:].mean()
     gauges_indicators(fig,values)
     ping_number(fig,values['ping'])
     line_chart_download_vs_upload(fig,df)

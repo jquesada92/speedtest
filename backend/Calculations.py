@@ -33,12 +33,15 @@ def get_corr(df,by='day_of_week'):
 
         
 
-
+last_date = dt.now().date()
 
 while True:
     df = read_data()
-    get_corr(df,by='day_of_week')
-    get_corr(df,by='part_of_the_date')
+    now = dt.now().date()
+    if  now != last_date:
+        get_corr(df,by='day_of_week')
+        get_corr(df,by='part_of_the_date')
+        last_date = now
     last_30_days = dt.now().date() - td(days=30)
     df.set_index('timestamp').loc[last_30_days: ].copy().sort_index().to_parquet('../calculations/data.parquet')
     sleep(60*15)
