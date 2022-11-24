@@ -1,0 +1,13 @@
+20221121133001
+
+   Speedtest by Ookla
+
+      Server: Tigo Panama - Panama City (id: 35853)
+         ISP: Tigo Panama
+Idle Latency:    14.78 ms   (jitter: 2.34ms, low: 13.00ms, high: 16.76ms)
+    Download:    47.04 Mbps (data used: 62.4 MB)                                                   
+                163.94 ms   (jitter: 52.12ms, low: 19.68ms, high: 388.38ms)
+      Upload:    14.94 Mbps (data used: 17.0 MB)                                                   
+                 26.20 ms   (jitter: 7.76ms, low: 5.96ms, high: 87.74ms)
+ Packet Loss:     0.0%
+  Result URL: https://www.speedtest.net/result/c/4f4429c5-1f1c-42c2-888d-3a734c1e67fc

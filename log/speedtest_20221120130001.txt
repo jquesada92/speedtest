@@ -1,0 +1,13 @@
+20221120130001
+
+   Speedtest by Ookla
+
+      Server: Trans Ocean Network - Colón City (id: 28489)
+         ISP: Tigo Panama
+Idle Latency:    15.38 ms   (jitter: 11.00ms, low: 11.98ms, high: 31.84ms)
+    Download:    68.74 Mbps (data used: 84.4 MB)                                                   
+                201.34 ms   (jitter: 63.78ms, low: 19.50ms, high: 519.16ms)
+      Upload:    14.96 Mbps (data used: 12.2 MB)                                                   
+                 12.92 ms   (jitter: 5.54ms, low: 6.30ms, high: 55.06ms)
+ Packet Loss:     0.0%
+  Result URL: https://www.speedtest.net/result/c/e9b3f67a-8cc0-4175-be2d-28a11016ef0d

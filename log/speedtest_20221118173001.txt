@@ -1,0 +1,13 @@
+20221118173001
+
+   Speedtest by Ookla
+
+      Server: Digicel Panama - Panama East (id: 13892)
+         ISP: Tigo Panama
+Idle Latency:    15.10 ms   (jitter: 5.38ms, low: 6.72ms, high: 17.58ms)
+    Download:    40.14 Mbps (data used: 23.2 MB)                                                   
+                 56.88 ms   (jitter: 40.82ms, low: 8.60ms, high: 376.34ms)
+      Upload:    14.28 Mbps (data used: 6.6 MB)                                                   
+                 10.00 ms   (jitter: 3.04ms, low: 5.78ms, high: 35.66ms)
+ Packet Loss:     0.0%
+  Result URL: https://www.speedtest.net/result/c/8f179638-fc35-49aa-821d-e8583762ef9d
