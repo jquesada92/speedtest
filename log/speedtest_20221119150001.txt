@@ -1,13 +1,0 @@
-20221119150001
-
-   Speedtest by Ookla
-
-      Server: OVNICOM - Panama City (id: 16914)
-         ISP: Tigo Panama
-Idle Latency:    12.46 ms   (jitter: 3.04ms, low: 11.28ms, high: 22.12ms)
-    Download:    39.40 Mbps (data used: 46.8 MB)                                                   
-                 27.74 ms   (jitter: 7.62ms, low: 17.50ms, high: 46.76ms)
-      Upload:    15.08 Mbps (data used: 17.6 MB)                                                   
-                 32.74 ms   (jitter: 3.50ms, low: 5.78ms, high: 84.52ms)
- Packet Loss:     0.0%
-  Result URL: https://www.speedtest.net/result/c/0973990b-b6bc-4e20-a4de-04a4e0a6a15c

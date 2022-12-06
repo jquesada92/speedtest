@@ -1,13 +1,0 @@
-20221120131501
-
-   Speedtest by Ookla
-
-      Server: Trans Ocean Network - Panama City (id: 28116)
-         ISP: Tigo Panama
-Idle Latency:    14.58 ms   (jitter: 3.00ms, low: 12.88ms, high: 20.02ms)
-    Download:    55.96 Mbps (data used: 82.4 MB)                                                   
-                312.24 ms   (jitter: 74.42ms, low: 16.00ms, high: 680.32ms)
-      Upload:    15.10 Mbps (data used: 17.2 MB)                                                   
-                 27.94 ms   (jitter: 4.96ms, low: 5.94ms, high: 78.98ms)
- Packet Loss:     0.0%
-  Result URL: https://www.speedtest.net/result/c/e8944ece-fce3-48d4-a42a-059b044570a0

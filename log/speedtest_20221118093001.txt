@@ -1,13 +1,0 @@
-20221118093001
-
-   Speedtest by Ookla
-
-      Server: Gold Data Panama - Panama City (id: 15020)
-         ISP: Tigo Panama
-Idle Latency:    13.72 ms   (jitter: 2.64ms, low: 12.68ms, high: 17.16ms)
-    Download:   116.92 Mbps (data used: 192.2 MB)                                                   
-                110.16 ms   (jitter: 36.58ms, low: 9.34ms, high: 629.18ms)
-      Upload:    14.88 Mbps (data used: 18.0 MB)                                                   
-                 25.12 ms   (jitter: 4.84ms, low: 5.42ms, high: 57.20ms)
- Packet Loss:     0.0%
-  Result URL: https://www.speedtest.net/result/c/9d260411-4a30-4dd6-b183-ea9b8ba4df5c
